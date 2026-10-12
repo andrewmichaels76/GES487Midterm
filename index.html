@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>NEIU New Student Directory</title>
+
+         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+           crossorigin=""/>
+
+         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+           integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+           crossorigin=""></script>
+		 
+
+		 <style type="text/css">
+		 html, body { margin: 0; padding: 0; height: 100%; }
+		 body { display: flex; flex-direction: column; }
+		 h1 {
+			 margin: 0;
+			 padding: 10px 16px 10px 60px;
+			 font: bold 20px "Bookman Old Style", Bookman, "URW Bookman", serif;
+			 text-align: left;
+			 color: #003DA7;
+			 background: #FDB813;
+		 }
+		 
+		 #map { flex: 1; }
+		 
+		 .leaflet-popup-content-wrapper,
+		 .leaflet-popup-tip {
+			 background: #FDB813;
+		 }
+		 
+		 </style>
+		 
+		 <link rel="icon" href="campus1.png" >
+		 
+    </head>
+
+    <body>
+	
+		<h1>NEIU New Student Campus Building Directory</h1>
+	
+        <div id="map"></div>
+
+        <script type="text/javascript">
+
+          var map = L.map('map', {
+              center: [41.9810,-87.7181],
+              zoom: 16,
+			  minZoom: 4,
+			  maxZoom: 20
+          });
+
+          
+		  var canvas = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+			attribution: 'Powered by <a href="https://www.esri.com">Esri</a> | Sources: Esri, HERE, Garmin, USGS, Intermap, INCREMENT P, NRCan, Esri Japan, METI, Esri China (Hong Kong), Esri Korea, Esri (Thailand), NGCC, &copy; OpenStreetMap contributors, and the GIS User Community',
+			maxZoom: 20,
+		    maxNativeZoom: 19
+		   }).addTo(map);
+
+		  var imagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+			attribution: 'Tiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+			maxZoom: 20,
+			maxNativeZoom: 19
+		   });;
+
+
+		  var basemaps = {
+			  "World Street Map": canvas,
+			  "Satellite Imagery": imagery
+		  };
+
+
+		  L.control.layers(basemaps).addTo(map);
+
+var AbacusIcon = L.icon({
+    iconUrl: 'abacus1.png',
+    iconSize:     [38, 38],
+    iconAnchor:   [19, 19],
+    popupAnchor:  [0, -10],
+});
+
+
+var BooksIcon = L.icon({
+    iconUrl: 'books2.png',
+    iconSize:     [38, 38],
+    iconAnchor:   [19, 19],
+    popupAnchor:  [0, -10],
+});
+
+
+var GlobeIcon = L.icon({
+    iconUrl: 'globe3.png',
+    iconSize:     [38, 38],
+    iconAnchor:   [19, 19],
+    popupAnchor:  [0, -10],
+});
+
+var MusicIcon = L.icon({
+    iconUrl: 'music4.png',
+    iconSize:     [38, 38],
+    iconAnchor:   [19, 19],
+    popupAnchor:  [0, -10],
+});
+
+var PinIcon = L.icon({
+    iconUrl: 'pin5.png',
+    iconSize:     [38, 38],
+    iconAnchor:   [19, 19],
+    popupAnchor:  [0, -10],
+});
+			
+var marker1 = L.marker([41.98240773902009,-87.7185136953744], {icon: AbacusIcon, alt: 'Lech Walesa Hall'}).addTo(map);
+var marker2 = L.marker([41.98038169947984,-87.71913906825189], {icon: BooksIcon, alt: 'Ronald Williams Library'}).addTo(map);
+var marker3 = L.marker([41.98043925845999,-87.71699882695317], {icon: GlobeIcon, alt: 'Bernard J. Brommel Hall'}).addTo(map);
+var marker4 = L.marker([41.98118895045586,-87.71909199126532], {icon: MusicIcon, alt: 'Steinberg Fine Arts Center'}).addTo(map);
+var marker5 = L.marker([41.98182681497158,-87.71741838811901], {icon: PinIcon, alt: 'Sachs Administrative Building'}).addTo(map);
+
+var pic1 = '<img src="LWH.png" alt="Lech Walesa Hall - LWH" width="250">';
+var pic2 = '<img src="LIB.png" alt="Ronald Williams Library - LIB" width="250">';
+var pic3 = '<img src="BBH.png" alt="Bernard J. Brommel Hall - BBH" width="250">';
+var pic4 = '<img src="FA.png" alt="Steinberg Fine Arts Center - FA" width="250">';
+var pic5 = '<img src="C.png" alt="Sachs Administrative Building - C" width="250">';
+
+marker1.bindPopup('<p style="color:#003DA7; font-weight:bold"> LECH WALESA HALL - LWH<br>An academic facility that houses academic testing, the Graduate College, and vital multicultural support programs</p>' + pic1);
+marker2.bindPopup('<p style="color:#003DA7; font-weight:bold"> RONALD WILLIAMS LIBRARY - LIB<br>Provides extensive digital and traditional resources and houses critical resources such as subject labs and quiet sudy areas</p>' + pic2);
+marker3.bindPopup('<p style="color:#003DA7; font-weight:bold"> BERNARD J BROMMEL HALL - BBH<br>This is the main academic facility for STEM fields, housing the College of Arts and Sciences as well as the Center for Science Engagement</p>' + pic3);
+marker4.bindPopup('<p style="color:#003DA7; font-weight:bold"> STEINBERG FINE ARTS CENTER - FA<br>Provides both academic and performance spaces and serves as the creative center of the campus, housing the Art Gallery, a box office, and a recital hall</p>' + pic4);
+marker5.bindPopup('<p style="color:#003DA7; font-weight:bold"> SACHS ADMINISTRATIVE BUILDING - C<br>Houses crucial leadership and administrative departments, including Academic Affairs, Finance/Administration, and the Office of the President</p>' + pic5);
+
+        </script>
+   </body>
+</html>
